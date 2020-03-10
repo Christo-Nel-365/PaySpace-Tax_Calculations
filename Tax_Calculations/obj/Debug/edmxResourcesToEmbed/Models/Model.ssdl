@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TaxDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Flat_Rate_tbl">
+    <Key>
+      <PropertyRef Name="FR_ID" />
+    </Key>
+    <Property Name="FR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Flate_Rate" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Flat_Value_tbl">
+    <Key>
+      <PropertyRef Name="FV_ID" />
+    </Key>
+    <Property Name="FV_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Flate_Value" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Flat_Value_Threshold" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Flat_Value_Percentage" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Postal_Code_tbl">
+    <Key>
+      <PropertyRef Name="PC_ID" />
+    </Key>
+    <Property Name="PC_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Postal_Code" Type="varchar" MaxLength="50" />
+    <Property Name="TCT_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="Progressive_Rate_tbl">
+    <Key>
+      <PropertyRef Name="PR_ID" />
+    </Key>
+    <Property Name="PR_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="From_Amt" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="To_Amt" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Rate" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tax_Calculation_Type">
+    <Key>
+      <PropertyRef Name="TCT_ID" />
+    </Key>
+    <Property Name="TCT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tax_Calc_Type" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Tax_Payable">
+    <Key>
+      <PropertyRef Name="TP_ID" />
+    </Key>
+    <Property Name="TP_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Tax_Payable" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TimeStamp" Type="datetime" />
+    <Property Name="Salary" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Postal_Code" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Postal_Code_tbl_Tax_Calculation_Type">
+    <End Role="Tax_Calculation_Type" Type="Self.Tax_Calculation_Type" Multiplicity="0..1" />
+    <End Role="Postal_Code_tbl" Type="Self.Postal_Code_tbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tax_Calculation_Type">
+        <PropertyRef Name="TCT_ID" />
+      </Principal>
+      <Dependent Role="Postal_Code_tbl">
+        <PropertyRef Name="TCT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TaxDBModelStoreContainer">
+    <EntitySet Name="Flat_Rate_tbl" EntityType="Self.Flat_Rate_tbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Flat_Value_tbl" EntityType="Self.Flat_Value_tbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Postal_Code_tbl" EntityType="Self.Postal_Code_tbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Progressive_Rate_tbl" EntityType="Self.Progressive_Rate_tbl" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tax_Calculation_Type" EntityType="Self.Tax_Calculation_Type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tax_Payable" EntityType="Self.Tax_Payable" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Postal_Code_tbl_Tax_Calculation_Type" Association="Self.FK_Postal_Code_tbl_Tax_Calculation_Type">
+      <End Role="Tax_Calculation_Type" EntitySet="Tax_Calculation_Type" />
+      <End Role="Postal_Code_tbl" EntitySet="Postal_Code_tbl" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

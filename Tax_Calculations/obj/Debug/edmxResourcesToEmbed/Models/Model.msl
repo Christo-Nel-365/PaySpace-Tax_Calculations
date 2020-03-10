@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TaxDBModelStoreContainer" CdmEntityContainer="TaxDBEntities">
+    <EntitySetMapping Name="Flat_Rate_tbl">
+      <EntityTypeMapping TypeName="TaxDBModel.Flat_Rate_tbl">
+        <MappingFragment StoreEntitySet="Flat_Rate_tbl">
+          <ScalarProperty Name="FR_ID" ColumnName="FR_ID" />
+          <ScalarProperty Name="Flate_Rate" ColumnName="Flate_Rate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Flat_Value_tbl">
+      <EntityTypeMapping TypeName="TaxDBModel.Flat_Value_tbl">
+        <MappingFragment StoreEntitySet="Flat_Value_tbl">
+          <ScalarProperty Name="FV_ID" ColumnName="FV_ID" />
+          <ScalarProperty Name="Flate_Value" ColumnName="Flate_Value" />
+          <ScalarProperty Name="Flat_Value_Threshold" ColumnName="Flat_Value_Threshold" />
+          <ScalarProperty Name="Flat_Value_Percentage" ColumnName="Flat_Value_Percentage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Postal_Code_tbl">
+      <EntityTypeMapping TypeName="TaxDBModel.Postal_Code_tbl">
+        <MappingFragment StoreEntitySet="Postal_Code_tbl">
+          <ScalarProperty Name="PC_ID" ColumnName="PC_ID" />
+          <ScalarProperty Name="Postal_Code" ColumnName="Postal_Code" />
+          <ScalarProperty Name="TCT_ID" ColumnName="TCT_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Progressive_Rate_tbl">
+      <EntityTypeMapping TypeName="TaxDBModel.Progressive_Rate_tbl">
+        <MappingFragment StoreEntitySet="Progressive_Rate_tbl">
+          <ScalarProperty Name="PR_ID" ColumnName="PR_ID" />
+          <ScalarProperty Name="From_Amt" ColumnName="From_Amt" />
+          <ScalarProperty Name="To_Amt" ColumnName="To_Amt" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="TaxDBModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tax_Calculation_Type">
+      <EntityTypeMapping TypeName="TaxDBModel.Tax_Calculation_Type">
+        <MappingFragment StoreEntitySet="Tax_Calculation_Type">
+          <ScalarProperty Name="TCT_ID" ColumnName="TCT_ID" />
+          <ScalarProperty Name="Tax_Calc_Type" ColumnName="Tax_Calc_Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tax_Payable">
+      <EntityTypeMapping TypeName="TaxDBModel.Tax_Payable">
+        <MappingFragment StoreEntitySet="Tax_Payable">
+          <ScalarProperty Name="TP_ID" ColumnName="TP_ID" />
+          <ScalarProperty Name="Tax_Payable1" ColumnName="Tax_Payable" />
+          <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="Postal_Code" ColumnName="Postal_Code" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

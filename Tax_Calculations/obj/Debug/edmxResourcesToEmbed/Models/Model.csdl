@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TaxDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Flat_Rate_tbl">
+    <Key>
+      <PropertyRef Name="FR_ID" />
+    </Key>
+    <Property Name="FR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Flate_Rate" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Flat_Value_tbl">
+    <Key>
+      <PropertyRef Name="FV_ID" />
+    </Key>
+    <Property Name="FV_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Flate_Value" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Flat_Value_Threshold" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Flat_Value_Percentage" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="Postal_Code_tbl">
+    <Key>
+      <PropertyRef Name="PC_ID" />
+    </Key>
+    <Property Name="PC_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Postal_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TCT_ID" Type="Int32" />
+    <NavigationProperty Name="Tax_Calculation_Type" Relationship="Self.FK_Postal_Code_tbl_Tax_Calculation_Type" FromRole="Postal_Code_tbl" ToRole="Tax_Calculation_Type" />
+  </EntityType>
+  <EntityType Name="Progressive_Rate_tbl">
+    <Key>
+      <PropertyRef Name="PR_ID" />
+    </Key>
+    <Property Name="PR_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="From_Amt" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="To_Amt" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Tax_Calculation_Type">
+    <Key>
+      <PropertyRef Name="TCT_ID" />
+    </Key>
+    <Property Name="TCT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tax_Calc_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Postal_Code_tbl" Relationship="Self.FK_Postal_Code_tbl_Tax_Calculation_Type" FromRole="Tax_Calculation_Type" ToRole="Postal_Code_tbl" />
+  </EntityType>
+  <EntityType Name="Tax_Payable">
+    <Key>
+      <PropertyRef Name="TP_ID" />
+    </Key>
+    <Property Name="TP_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tax_Payable1" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+    <Property Name="Salary" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Postal_Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_Postal_Code_tbl_Tax_Calculation_Type">
+    <End Role="Tax_Calculation_Type" Type="Self.Tax_Calculation_Type" Multiplicity="0..1" />
+    <End Role="Postal_Code_tbl" Type="Self.Postal_Code_tbl" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tax_Calculation_Type">
+        <PropertyRef Name="TCT_ID" />
+      </Principal>
+      <Dependent Role="Postal_Code_tbl">
+        <PropertyRef Name="TCT_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TaxDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Flat_Rate_tbl" EntityType="Self.Flat_Rate_tbl" />
+    <EntitySet Name="Flat_Value_tbl" EntityType="Self.Flat_Value_tbl" />
+    <EntitySet Name="Postal_Code_tbl" EntityType="Self.Postal_Code_tbl" />
+    <EntitySet Name="Progressive_Rate_tbl" EntityType="Self.Progressive_Rate_tbl" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Tax_Calculation_Type" EntityType="Self.Tax_Calculation_Type" />
+    <EntitySet Name="Tax_Payable" EntityType="Self.Tax_Payable" />
+    <AssociationSet Name="FK_Postal_Code_tbl_Tax_Calculation_Type" Association="Self.FK_Postal_Code_tbl_Tax_Calculation_Type">
+      <End Role="Tax_Calculation_Type" EntitySet="Tax_Calculation_Type" />
+      <End Role="Postal_Code_tbl" EntitySet="Postal_Code_tbl" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
